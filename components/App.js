@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import TodoInput from './TodoInput'
 import TodoList from './TodoList'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import actions from '../redux/actions'
 
 class App extends Component {
 
@@ -9,8 +11,8 @@ class App extends Component {
     return (
       <div>
         <h1>Todo List</h1>
-        <TodoInput dispatch={this.props.dispatch}/>
-        <TodoList todos={this.props.todos}/>
+        <TodoInput addTodo={this.props.actions.addTodo}/>
+        <TodoList actions={this.props.actions} todos={this.props.todos}/>
       </div>
     )
   }
@@ -20,5 +22,11 @@ class App extends Component {
 function mapStateToProps(state) {
   return state
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch),
+    dispatch: dispatch
+  }
+}
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
