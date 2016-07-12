@@ -18,6 +18,12 @@ let actions = {
       type: 'DELETE_TODO',
       id: id
     }
+  },
+  createNewUserId: function () {
+    return {
+      type: 'CREATE_USER_ID',
+      id: Math.round(Math.random() * 10)
+    };
   }
 
 }
